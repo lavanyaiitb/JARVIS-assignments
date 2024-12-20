@@ -28,31 +28,31 @@ print(new_array)
         
 def numpy_spiral_order(matrix):
     result = []
-    top, bottom = 0, matrix.shape[0] - 1
-    left, right = 0, matrix.shape[1] - 1
+    init_row, final_row = 0, matrix.shape[0] - 1
+    init_col, final_col = 0, matrix.shape[1] - 1
 
-    while top <= bottom and left <= right:
+    while init_row <= final_row and init_col <= final_col:
         # Traverse top row
-        for col in range(left, right + 1):
-            result.append(int(matrix[top, col]))#without int the output was not in proper array form eoth integers
-        top += 1
+        for i in range(init_col, final_col + 1):
+            result.append(int(matrix[init_row, i])) # without int the output was not in proper array form with integers
+        init_row += 1
 
         # Traverse right column
-        for row in range(top, bottom + 1):
-            result.append(int(matrix[row, right]))
-        right -= 1
+        for j in range(init_row, final_row + 1):
+            result.append(int(matrix[j, final_col]))
+        final_col -= 1
 
-        if top <= bottom:
+        if init_row <= final_row:
             # Traverse bottom row
-            for col in range(right, left - 1, -1):
-                result.append(int(matrix[bottom, col]))
-            bottom -= 1
+            for i in range(final_col, init_col - 1, -1):
+                result.append(int(matrix[final_row,i]))
+            final_row -= 1
 
-        if left <= right:
+        if init_col <= final_col:
             # Traverse left column
-            for row in range(bottom, top - 1, -1):
-                result.append(int(matrix[row, left]))
-            left += 1
+            for j in range(final_row, init_row - 1, -1):
+                result.append(int(matrix[j, init_col]))
+            init_col += 1
 
     return result
 
