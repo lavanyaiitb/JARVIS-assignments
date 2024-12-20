@@ -9,7 +9,7 @@ categories = ["Food", "Transportation", "Entertainment", "Bills", "Other"]
 # Database setup
 def setup_database():
     conn = sqlite3.connect("expenses.db")
-    cursor = conn.cursor()
+    cursor=conn.cursor()
     cursor.execute('''CREATE TABLE IF NOT EXISTS expenses (
                         id INTEGER PRIMARY KEY AUTOINCREMENT,
                         date TEXT NOT NULL,
@@ -21,18 +21,18 @@ def setup_database():
     conn.close()
 
 # Function to validate date
-def validate_date(date_str):
+def validate_date(date):
     try:
-        datetime.datetime.strptime(date_str, '%Y-%m-%d')
+        datetime.datetime.strptime(date, '%Y-%m-%d')
         return True
     except ValueError:
         return False
 
-# Function to log a new expense
+# Function to log a new expense 
 def add_expense():
-    print("\n=== Add a New Expense ===")
+    print("\n***!!Add a New Expense!!***")
     
-    # Get and validate the date
+    
     while True:
         date = input("Enter the date (YYYY-MM-DD): ")
         if validate_date(date):
@@ -40,7 +40,6 @@ def add_expense():
         else:
             print("Invalid date format. Please try again.")
 
-    # Get and validate the category
     while True:
         print("Available categories:")
         for i, category in enumerate(categories, 1):
@@ -83,8 +82,8 @@ def add_expense():
     print("\nExpense logged successfully!")
 
 # Function to display all logged expenses
-def display_expenses():
-    print("\n=== Logged Expenses ===")
+def show_expenses():
+    print("\n***!!Logged Expense!!***")
     conn = sqlite3.connect("expenses.db")
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM expenses")
@@ -149,7 +148,7 @@ def visualize_spending():
     
     # Pie chart
     plt.figure(figsize=(7, 7))
-    plt.pie(amounts, labels=categories, autopct='%1.1f%%', startangle=140)
+    plt.pie(amounts, labels=categories, autopct='%1.1f%%')
     plt.title('Spending Breakdown by Category')
     plt.show()
     
@@ -189,7 +188,7 @@ def main():
     setup_database()
 
     while True:
-        print("\n=== Expense Tracker ===")
+        print("\n***!! Expense Tracker!!***")
         print("1. Add a New Expense")
         print("2. View Logged Expenses")
         print("3. View Total Spending (Monthly)")
@@ -205,7 +204,7 @@ def main():
         if choice == "1":
             add_expense()
         elif choice == "2":
-            display_expenses()
+            show_expenses()
         elif choice == "3":
             total = total_spending(period='monthly')
             print(f"Total spending this month: ${total:.2f}")
@@ -225,7 +224,8 @@ def main():
             visualize_monthly_trends()
             input("\nPress Enter to return to the main menu...")
         elif choice == "9":
-            print("Exiting the program. Goodbye!")
+            print("Exiting the program........")
+            print("\nByeee :(")
             break
         else:
             print("Invalid choice. Please try again.")
